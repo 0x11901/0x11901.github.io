@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="0x11901的博客">
+    <meta name="keyword"  content="0x11901">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        利用iCloud Drive来同步Xcode配置 - 0x11901的博客 | 0x11901&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Trust no one. Even your compiler. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>0x11901</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#需求"><span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#脚本"><span class="toc-text">脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#让所有的电脑用同一个版本的配置"><span class="toc-text">让所有的电脑用同一个版本的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记"><span class="toc-text">后记</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Trust no one. Even your compiler. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        利用iCloud Drive来同步Xcode配置
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-05-11 15:09:54</span></span>
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>多年以前一位老程序员告诉笔者代码片段（code snippets）是程序员的财富，他有一个U盘，里面装着他的财富。每当他需要切换电脑写代码的时候，他就会把把精心配置的字体、主题、代码片段等部署到新电脑上，然后开始高速编码。每次看他写代码都是一种享受，不过这是另一个故事了。</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>多年之后，笔者也终于凑够了钱买了自己的Mac，闲暇无事的时候也会写写代码祭奠下逝去的青春。但是某些时候总会觉得很别扭，例如感觉字体和单位的有细小的差距，或者一个代码片段怎么也按不出来——最后发现是没有在这台电脑配置这段代码片段。这种事发生的事情多了之后，就会感觉厌烦，同样的操作为什么得重复两次、三次？或者拿出吃了几年灰的U盘抽插在各地的电脑上人工同步？就不能有什么办法可以一次更改多次应用？笔者稍微一拍脑门，想到了今天的主角——iCloud Drive</p>
+<ol>
+<li>为什么使用iCloud Drive？<ul>
+<li>因为这是苹果本家的网盘，嵌入系统中，只要开启我们就无需关心上传下载，正如OneDrive在Windows一样，我们只需要把文件放进去，他就会自动开始上传，并在你的每一台苹果设备上同步。利用这点我们就能方便的做到在不同的设备上同步Xcode配置文件，无需手动同步或者上传下载。</li>
+</ul>
+</li>
+<li>其他的替代方案<ul>
+<li>GitHub之类的大型同性交友网站<ul>
+<li>目前想来用git应该更好更方便，不过实现起来有点复杂，有能力的朋友可以自己动手</li>
+</ul>
+</li>
+<li>OneDrive/坚果云等网盘<ul>
+<li>我觉得能有自带的还是用自带的吧</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>总所周知Xcode的代码片段是保存在<code>~/Library/Developer/Xcode/UserData/CodeSnippets</code>路径下的，附近位置还有主题等配置信息。基于笔者的经验我们只需要备份同级目录下的CodeSnippets、FontAndColorThemes和KeyBindings三个子目录就行了。每当我们修改了代码片段、主题或者快捷键，把对应的文件放在iCloud Drive同步，当在其他电脑上时就使用最新的覆盖到对应目录即可。</p>
+<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><p>虽说思路如此，但是笔者肯定不敢把这种三岁小孩子就能分析出来的东西发出来糊弄人。所以为了简化这个繁琐而又机械的操作，笔者编写了这样一个脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -euo pipefail</span><br><span class="line"></span><br><span class="line"><span class="comment">################# variable define ##########</span></span><br><span class="line">now=`date <span class="string">"+%Y%m%d%H%M%S"</span>`</span><br><span class="line"></span><br><span class="line">red=`tput setaf 1`</span><br><span class="line">green=`tput setaf 2`</span><br><span class="line">yellow=`tput setaf 3`</span><br><span class="line">reset=`tput sgr0`</span><br><span class="line"></span><br><span class="line">xcode_dir=<span class="string">"<span class="variable">$&#123;HOME&#125;</span>/Library/Developer/Xcode/UserData"</span></span><br><span class="line">cloud_backup_dir=<span class="string">"<span class="variable">$&#123;HOME&#125;</span>/Library/Mobile Documents/com~apple~CloudDocs/XcodeBackup"</span></span><br><span class="line">local_backup_dir=<span class="string">"<span class="variable">$&#123;HOME&#125;</span>/资源/归档/XcodeBackup"</span></span><br><span class="line"></span><br><span class="line">code_snippets=<span class="string">"CodeSnippets"</span></span><br><span class="line">font_and_color_themes=<span class="string">"FontAndColorThemes"</span></span><br><span class="line">key_bindings=<span class="string">"KeyBindings"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">########### MAIN ##################</span></span><br><span class="line"><span class="comment"># check directory exist</span></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;red&#125;</span>iCloud Drive备份路径不存在！<span class="variable">$&#123;reset&#125;</span>"</span></span><br><span class="line">    mkdir -p <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;green&#125;</span>自动创建iCloud Drive备份路径：<span class="variable">$&#123;reset&#125;</span><span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;green&#125;</span>iCloud Drive备份路径:<span class="variable">$&#123;reset&#125;</span><span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="string">"<span class="variable">$&#123;local_backup_dir&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;red&#125;</span>本地备份路径不存在！<span class="variable">$&#123;reset&#125;</span>"</span></span><br><span class="line">    mkdir -p <span class="string">"<span class="variable">$&#123;local_backup_dir&#125;</span>"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;green&#125;</span>自动创建本地备份路径：<span class="variable">$&#123;reset&#125;</span><span class="variable">$&#123;local_backup_dir&#125;</span>"</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;green&#125;</span>本地备份路径:<span class="variable">$&#123;reset&#125;</span><span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># zip files</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$&#123;xcode_dir&#125;</span>"</span></span><br><span class="line">zip -r <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>/XcodeBackup+<span class="variable">$&#123;now&#125;</span>.zip"</span> <span class="string">"<span class="variable">$&#123;code_snippets&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;font_and_color_themes&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;key_bindings&#125;</span>"</span> &amp;</span><br><span class="line">zip -r <span class="string">"<span class="variable">$&#123;local_backup_dir&#125;</span>/XcodeBackup+<span class="variable">$&#123;now&#125;</span>.zip"</span> <span class="string">"<span class="variable">$&#123;code_snippets&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;font_and_color_themes&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;key_bindings&#125;</span>"</span> &amp;</span><br><span class="line"></span><br><span class="line"><span class="built_in">wait</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># delete unnecessary backup files</span></span><br><span class="line">num=`ls -l <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span> |grep <span class="string">"^-"</span>|wc -l`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$&#123;num&#125;</span> -gt 5 ]; <span class="keyword">then</span></span><br><span class="line">    num=`expr <span class="variable">$&#123;num&#125;</span> - 5`</span><br><span class="line">    <span class="built_in">cd</span> <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span></span><br><span class="line">    ls -tr <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span> | head -<span class="variable">$&#123;num&#125;</span> | xargs rm</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">num=`ls -l <span class="string">"<span class="variable">$&#123;local_backup_dir&#125;</span>"</span> |grep <span class="string">"^-"</span>|wc -l`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$&#123;num&#125;</span> -gt 5 ]; <span class="keyword">then</span></span><br><span class="line">    num=`expr <span class="variable">$&#123;num&#125;</span> - 5`</span><br><span class="line">    <span class="built_in">cd</span> <span class="string">"<span class="variable">$&#123;local_backup_dir&#125;</span>"</span></span><br><span class="line">    ls -tr <span class="string">"<span class="variable">$&#123;local_backup_dir&#125;</span>"</span> | head -<span class="variable">$&#123;num&#125;</span> | xargs rm</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>简化了这个繁琐的操作，仅需在开机的时候跑一下，就能达到自动备份的效果。功能也是十分的简单：</p>
+<ol>
+<li>首先创建了两个备份Xcode配置文件的路径，一个在云端，一个在本地（本地路径大家可以自行配置，一般也不会用上）。</li>
+<li>然后把Xcode归档到这两处各一份，笔者这里选用zip包而不是更高压缩比的7zip等是因为想做通用一点便于大家开箱即用，不需要额外安装其他软件。</li>
+<li>最后将多次运行后生成的老包删除，只保留最新的5个，以便节约宝贵的空间（毕竟笔者比较穷只舍得用免费的5g版）</li>
+</ol>
+<p>有了这个脚本之后，大家只需要坚持开机的时候跑一跑就行了。笔者喜欢每天开机就更新下cocoapods、brew、brew cask这类的，所以就写了个脚本，刚好顺便也就备份一下。脚本思路大致如下，因为和主题无关就不细说了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line">open 自用魔法丝袜之影</span><br><span class="line"></span><br><span class="line"><span class="built_in">wait</span></span><br><span class="line"></span><br><span class="line">pod repo update --verbose &amp;</span><br><span class="line">更新Homebrew cask &amp;</span><br><span class="line">备份各种币钱包 &amp;</span><br><span class="line"></span><br><span class="line">备份Xcode等IDE配置文件 &amp;</span><br><span class="line"></span><br><span class="line"><span class="built_in">wait</span></span><br><span class="line"></span><br><span class="line">killall 自用魔法丝袜之影</span><br></pre></td></tr></table></figure>
+<p>不过这样其实也不是很方便，毕竟打开terminal输入指令都很烦了，难道还要手动计算这台电脑的配置是否是最新的？然后再考虑是不是需要把云盘里面的配置解压到指定的位置覆盖？而且很有可能在做这些前已经把这台电脑的配置当最新版上传到云盘里了。</p>
+<h2 id="让所有的电脑用同一个版本的配置"><a href="#让所有的电脑用同一个版本的配置" class="headerlink" title="让所有的电脑用同一个版本的配置"></a>让所有的电脑用同一个版本的配置</h2><p>笔者再次进行了思考。如果可以根据这些文件的最后修改日期和备份的文件进行比较，谁新就用哪个版本，那么不就实现了吗？只要我们确保每次修改都跑一次脚本，每次开机都跑一次，就能达到我们想要的效果了。至于如何判断文件的最后修改时间，笔者认为只需要一个根据文件名生成的key和一个对应的文件的最后修改时间做value的数据结构就行了（虽说也可以把备份的文件展开比较，但是因为笔者才疏学浅，尚不知如何操作，就只能通过键值对来判断了）<br>不过实际操作起来，再次彰显了笔者的才疏学浅，笔者也不知道如何在bash中创建一个高效并能持久化的键值对，如果哪位大佬知道请务必告诉笔者。<br>最后笔者想到Mac自带的SQLite3，虽说这样一个小小的功能上数据库是有一点高射炮打蚊子，但是能跑就行吧。脚本如下；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -euo pipefail</span><br><span class="line"></span><br><span class="line"><span class="comment">################# variable define ##########</span></span><br><span class="line">now=`date <span class="string">"+%Y%m%d%H%M%S"</span>`</span><br><span class="line"></span><br><span class="line">red=`tput setaf 1`</span><br><span class="line">green=`tput setaf 2`</span><br><span class="line">yellow=`tput setaf 3`</span><br><span class="line">reset=`tput sgr0`</span><br><span class="line"></span><br><span class="line">xcode_dir=<span class="string">"<span class="variable">$&#123;HOME&#125;</span>/Library/Developer/Xcode/UserData"</span></span><br><span class="line">cloud_backup_dir=<span class="string">"<span class="variable">$&#123;HOME&#125;</span>/Library/Mobile Documents/com~apple~CloudDocs/XcodeBackup"</span></span><br><span class="line">local_backup_dir=<span class="string">"<span class="variable">$&#123;HOME&#125;</span>/资源/归档/XcodeBackup"</span></span><br><span class="line"></span><br><span class="line">xcode_backup_database=<span class="string">"<span class="variable">$&#123;HOME&#125;</span>/Library/Mobile Documents/com~apple~CloudDocs/.BackupDatabase"</span></span><br><span class="line"></span><br><span class="line">code_snippets=<span class="string">"CodeSnippets"</span></span><br><span class="line">font_and_color_themes=<span class="string">"FontAndColorThemes"</span></span><br><span class="line">key_bindings=<span class="string">"KeyBindings"</span></span><br><span class="line"></span><br><span class="line">temp=<span class="string">"DoNotModify"</span></span><br><span class="line">database=<span class="string">"<span class="variable">$&#123;xcode_backup_database&#125;</span>/<span class="variable">$&#123;temp&#125;</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">########### MAIN ##################</span></span><br><span class="line"><span class="comment"># check directory exist</span></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;red&#125;</span>iCloud Drive备份路径不存在！<span class="variable">$&#123;reset&#125;</span>"</span></span><br><span class="line">    mkdir -p <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;green&#125;</span>自动创建iCloud Drive备份路径：<span class="variable">$&#123;reset&#125;</span><span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;green&#125;</span>iCloud Drive备份路径:<span class="variable">$&#123;reset&#125;</span><span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="string">"<span class="variable">$&#123;local_backup_dir&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;red&#125;</span>本地备份路径不存在！<span class="variable">$&#123;reset&#125;</span>"</span></span><br><span class="line">    mkdir -p <span class="string">"<span class="variable">$&#123;local_backup_dir&#125;</span>"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;green&#125;</span>自动创建本地备份路径：<span class="variable">$&#123;reset&#125;</span><span class="variable">$&#123;local_backup_dir&#125;</span>"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;green&#125;</span>本地备份路径:<span class="variable">$&#123;reset&#125;</span><span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="string">"<span class="variable">$&#123;xcode_backup_database&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;red&#125;</span>同步数据库路径不存在！<span class="variable">$&#123;reset&#125;</span>"</span></span><br><span class="line">    mkdir -p <span class="string">"<span class="variable">$&#123;xcode_backup_database&#125;</span>"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;green&#125;</span>自动创建数据库路径：<span class="variable">$&#123;reset&#125;</span><span class="variable">$&#123;local_backup_dir&#125;</span>"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;green&#125;</span>数据库路径:<span class="variable">$&#123;reset&#125;</span><span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">sqlite3 <span class="string">"<span class="variable">$&#123;database&#125;</span>"</span> <span class="string">'create table if not exists backupXcode(id integer primary key not NULL,key integer unique not NULL,value integer not NULL);'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#获取最后修改时间</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$&#123;xcode_dir&#125;</span>"</span></span><br><span class="line"><span class="keyword">if</span> [ -d <span class="string">"./<span class="variable">$&#123;code_snippets&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    find <span class="string">"./<span class="variable">$&#123;code_snippets&#125;</span>"</span> -<span class="built_in">type</span> f &gt;&gt; <span class="variable">$&#123;temp&#125;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ -d <span class="string">"./<span class="variable">$&#123;font_and_color_themes&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    find <span class="string">"./<span class="variable">$&#123;font_and_color_themes&#125;</span>"</span> -<span class="built_in">type</span> f &gt;&gt; <span class="variable">$&#123;temp&#125;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ -d <span class="string">"./<span class="variable">$&#123;key_bindings&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    find <span class="string">"./<span class="variable">$&#123;key_bindings&#125;</span>"</span> -<span class="built_in">type</span> f &gt;&gt; <span class="variable">$&#123;temp&#125;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> path; <span class="keyword">do</span></span><br><span class="line">    key=`md5 -q -s <span class="string">"<span class="variable">$&#123;path&#125;</span>"</span>`</span><br><span class="line">    value=`<span class="built_in">stat</span> -f <span class="string">"%m"</span> <span class="string">"<span class="variable">$&#123;path&#125;</span>"</span>`</span><br><span class="line">    isModify=`sqlite3 <span class="string">"<span class="variable">$&#123;database&#125;</span>"</span> <span class="string">"select value from backupXcode where key == '<span class="variable">$&#123;key&#125;</span>';"</span>`</span><br><span class="line">    <span class="keyword">if</span> [ -z <span class="variable">$&#123;isModify&#125;</span> ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;yellow&#125;</span>本地Xcode配置尚未同步<span class="variable">$&#123;reset&#125;</span>！"</span></span><br><span class="line">        num=`ls -l <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span> |grep <span class="string">"^-"</span>|wc -l`</span><br><span class="line">        <span class="keyword">if</span> [ <span class="variable">$&#123;num&#125;</span> -ge 1 ]; <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;green&#125;</span>找到最新的Xcode配置，开始自动替换<span class="variable">$&#123;reset&#125;</span>！"</span></span><br><span class="line">            </span><br><span class="line">            <span class="built_in">cd</span> <span class="string">"<span class="variable">$&#123;xcode_dir&#125;</span>"</span></span><br><span class="line">            <span class="comment">## backup before</span></span><br><span class="line">            zip -r <span class="string">"XcodeBackup.zip"</span> <span class="string">"<span class="variable">$&#123;code_snippets&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;font_and_color_themes&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;key_bindings&#125;</span>"</span> &amp;</span><br><span class="line">            <span class="built_in">wait</span></span><br><span class="line">            </span><br><span class="line">            <span class="built_in">cd</span> <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span></span><br><span class="line">            newBackup=`ls -t | head -1`</span><br><span class="line">            </span><br><span class="line">            unzip -u <span class="string">"<span class="variable">$&#123;newBackup&#125;</span>"</span> -d <span class="string">"<span class="variable">$&#123;xcode_dir&#125;</span>"</span> &amp;</span><br><span class="line">            <span class="built_in">wait</span></span><br><span class="line">            </span><br><span class="line">            <span class="built_in">cd</span> <span class="string">"<span class="variable">$&#123;xcode_dir&#125;</span>"</span></span><br><span class="line">            rm <span class="variable">$&#123;temp&#125;</span></span><br><span class="line">            <span class="keyword">if</span> [ -d <span class="string">"./<span class="variable">$&#123;code_snippets&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">                find <span class="string">"./<span class="variable">$&#123;code_snippets&#125;</span>"</span> -<span class="built_in">type</span> f &gt;&gt; <span class="variable">$&#123;temp&#125;</span></span><br><span class="line">            <span class="keyword">fi</span></span><br><span class="line">            <span class="keyword">if</span> [ -d <span class="string">"./<span class="variable">$&#123;font_and_color_themes&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">                find <span class="string">"./<span class="variable">$&#123;font_and_color_themes&#125;</span>"</span> -<span class="built_in">type</span> f &gt;&gt; <span class="variable">$&#123;temp&#125;</span></span><br><span class="line">            <span class="keyword">fi</span></span><br><span class="line">            <span class="keyword">if</span> [ -d <span class="string">"./<span class="variable">$&#123;key_bindings&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">                find <span class="string">"./<span class="variable">$&#123;key_bindings&#125;</span>"</span> -<span class="built_in">type</span> f &gt;&gt; <span class="variable">$&#123;temp&#125;</span></span><br><span class="line">            <span class="keyword">fi</span></span><br><span class="line">            <span class="built_in">echo</span> 更新数据库...</span><br><span class="line">            <span class="keyword">while</span> <span class="built_in">read</span> path; <span class="keyword">do</span></span><br><span class="line">                key=`md5 -q -s <span class="string">"<span class="variable">$&#123;path&#125;</span>"</span>`</span><br><span class="line">                value=`<span class="built_in">stat</span> -f <span class="string">"%m"</span> <span class="string">"<span class="variable">$&#123;path&#125;</span>"</span>`</span><br><span class="line">                sqlite3 <span class="string">"<span class="variable">$&#123;database&#125;</span>"</span> <span class="string">"insert or replace into backupXcode values(NULL,'<span class="variable">$&#123;key&#125;</span>',<span class="variable">$&#123;value&#125;</span>);"</span> &amp;</span><br><span class="line">            <span class="keyword">done</span> &lt; <span class="variable">$&#123;temp&#125;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        <span class="built_in">break</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">if</span> [ <span class="variable">$&#123;isModify&#125;</span> != <span class="variable">$&#123;value&#125;</span> ]; <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="variable">$&#123;isModify&#125;</span> -gt <span class="variable">$&#123;value&#125;</span> ]; <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;yellow&#125;</span>本地Xcode配置超前<span class="variable">$&#123;reset&#125;</span>！"</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;yellow&#125;</span>本地Xcode配置已经过期<span class="variable">$&#123;reset&#125;</span>！"</span></span><br><span class="line">            </span><br><span class="line">            num=`ls -l <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span> |grep <span class="string">"^-"</span>|wc -l`</span><br><span class="line">            <span class="keyword">if</span> [ <span class="variable">$&#123;num&#125;</span> -ge 1 ]; <span class="keyword">then</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;green&#125;</span>找到最新的Xcode配置，开始自动替换<span class="variable">$&#123;reset&#125;</span>！"</span></span><br><span class="line">                </span><br><span class="line">                <span class="built_in">cd</span> <span class="string">"<span class="variable">$&#123;xcode_dir&#125;</span>"</span></span><br><span class="line">                <span class="comment">## backup before</span></span><br><span class="line">                zip -r <span class="string">"XcodeBackup.zip"</span> <span class="string">"<span class="variable">$&#123;code_snippets&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;font_and_color_themes&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;key_bindings&#125;</span>"</span> &amp;</span><br><span class="line">                <span class="built_in">wait</span></span><br><span class="line">                </span><br><span class="line">                <span class="built_in">cd</span> <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span></span><br><span class="line">                newBackup=`ls -t | head -1`</span><br><span class="line">                </span><br><span class="line">                unzip -o <span class="string">"<span class="variable">$&#123;newBackup&#125;</span>"</span> -d <span class="string">"<span class="variable">$&#123;xcode_dir&#125;</span>"</span> &amp;</span><br><span class="line">                <span class="built_in">wait</span></span><br><span class="line">            <span class="keyword">fi</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        <span class="built_in">cd</span> <span class="string">"<span class="variable">$&#123;xcode_dir&#125;</span>"</span></span><br><span class="line">        rm <span class="variable">$&#123;temp&#125;</span></span><br><span class="line">        <span class="keyword">if</span> [ -d <span class="string">"./<span class="variable">$&#123;code_snippets&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">            find <span class="string">"./<span class="variable">$&#123;code_snippets&#125;</span>"</span> -<span class="built_in">type</span> f &gt;&gt; <span class="variable">$&#123;temp&#125;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        <span class="keyword">if</span> [ -d <span class="string">"./<span class="variable">$&#123;font_and_color_themes&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">            find <span class="string">"./<span class="variable">$&#123;font_and_color_themes&#125;</span>"</span> -<span class="built_in">type</span> f &gt;&gt; <span class="variable">$&#123;temp&#125;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        <span class="keyword">if</span> [ -d <span class="string">"./<span class="variable">$&#123;key_bindings&#125;</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">            find <span class="string">"./<span class="variable">$&#123;key_bindings&#125;</span>"</span> -<span class="built_in">type</span> f &gt;&gt; <span class="variable">$&#123;temp&#125;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        <span class="built_in">echo</span> 更新数据库...</span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">read</span> path; <span class="keyword">do</span></span><br><span class="line">            key=`md5 -q -s <span class="string">"<span class="variable">$&#123;path&#125;</span>"</span>`</span><br><span class="line">            value=`<span class="built_in">stat</span> -f <span class="string">"%m"</span> <span class="string">"<span class="variable">$&#123;path&#125;</span>"</span>`</span><br><span class="line">            sqlite3 <span class="string">"<span class="variable">$&#123;database&#125;</span>"</span> <span class="string">"insert or replace into backupXcode values(NULL,'<span class="variable">$&#123;key&#125;</span>',<span class="variable">$&#123;value&#125;</span>);"</span></span><br><span class="line">        <span class="keyword">done</span> &lt; <span class="variable">$&#123;temp&#125;</span></span><br><span class="line">        <span class="built_in">break</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span> &lt; <span class="variable">$&#123;temp&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">wait</span></span><br><span class="line">rm <span class="variable">$&#123;temp&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># zip files</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$&#123;xcode_dir&#125;</span>"</span></span><br><span class="line">zip -r <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>/XcodeBackup+<span class="variable">$&#123;now&#125;</span>.zip"</span> <span class="string">"<span class="variable">$&#123;code_snippets&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;font_and_color_themes&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;key_bindings&#125;</span>"</span> &amp;</span><br><span class="line">zip -r <span class="string">"<span class="variable">$&#123;local_backup_dir&#125;</span>/XcodeBackup+<span class="variable">$&#123;now&#125;</span>.zip"</span> <span class="string">"<span class="variable">$&#123;code_snippets&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;font_and_color_themes&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;key_bindings&#125;</span>"</span> &amp;</span><br><span class="line"></span><br><span class="line"><span class="built_in">wait</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># delete unnecessary backup files</span></span><br><span class="line">num=`ls -l <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span> |grep <span class="string">"^-"</span>|wc -l`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$&#123;num&#125;</span> -gt 5 ]; <span class="keyword">then</span></span><br><span class="line">    num=`expr <span class="variable">$&#123;num&#125;</span> - 5`</span><br><span class="line">    <span class="built_in">cd</span> <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span></span><br><span class="line">    ls -tr <span class="string">"<span class="variable">$&#123;cloud_backup_dir&#125;</span>"</span> | head -<span class="variable">$&#123;num&#125;</span> | xargs rm</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">num=`ls -l <span class="string">"<span class="variable">$&#123;local_backup_dir&#125;</span>"</span> |grep <span class="string">"^-"</span>|wc -l`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$&#123;num&#125;</span> -gt 5 ]; <span class="keyword">then</span></span><br><span class="line">    num=`expr <span class="variable">$&#123;num&#125;</span> - 5`</span><br><span class="line">    <span class="built_in">cd</span> <span class="string">"<span class="variable">$&#123;local_backup_dir&#125;</span>"</span></span><br><span class="line">    ls -tr <span class="string">"<span class="variable">$&#123;local_backup_dir&#125;</span>"</span> | head -<span class="variable">$&#123;num&#125;</span> | xargs rm</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>笔者简单测试了一下，基本上能用。以此思路，应该也可用在Alfred、vimrc等配置文件。不过依旧不是很方便，不过笔者才疏学浅，目前也就这个水平了，希望能对大家有所帮助，不知道大家有没有什么好的建议？笔者认为可以在Xcode关闭时自动运行本脚本，但是尚未找到好的胡克点_(:<em>」∠)</em>，如果大家有什么好的建议，欢迎<a href="https://github.com/0x11901/Scripts/blob/master/BackupXcode.sh" target="_blank" rel="noopener">PR</a></p>
+<p>就这样吧，下台鞠躬！！！</p>
+<div style="text-align:center;color: #ccc;font-size:14px;"><br>    —— 本文结束 ——<br></div>
+
+<p><center>本作品采用采用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="noopener">知识共享署名 4.0 国际许可协议</a>进行许可。</center><br><br></p>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">donate</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <div id="comment-container">
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/0x11901">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="http://127.0.0.1:43110/0x11901.bit/">ZeroNet</a></span>
+        <span>/</span>
+        
+        <span><a href="https://juejin.im/user/5aeeff38f265da0b722b0600/posts">juejin.im</a></span>
+        <span>/</span>
+        
+        <span><a href="https://www.jianshu.com/u/601e0f3e32a2">简书</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: '利用iCloud Drive来同步Xcode配置',
+        owner: '0x11901',
+        repo: 'Gitment',
+        oauth: {
+            client_id: 'a3599e4d81b2757fda08',
+            client_secret: 'e99f88ebed2d14cd64648e8bbd0f2cb5631446d9',
+        },
+    })
+    gitment.render('comment-container')
+</script>
+
+</html>
