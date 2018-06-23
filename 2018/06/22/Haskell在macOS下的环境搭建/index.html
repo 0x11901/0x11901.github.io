@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开发环境的搭建"><span class="toc-text">开发环境的搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编译器-GHC-、解释器-GHCI-等Haskell工具链"><span class="toc-text">编译器(GHC)、解释器(GHCI)等Haskell工具链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编辑器"><span class="toc-text">编辑器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IDE"><span class="toc-text">IDE</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HaskForce"><span class="toc-text">HaskForce</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开发环境的搭建"><span class="toc-text">开发环境的搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编译器-GHC-、解释器-GHCI-等Haskell工具链"><span class="toc-text">编译器(GHC)、解释器(GHCI)等Haskell工具链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编辑器"><span class="toc-text">编辑器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IDE"><span class="toc-text">IDE</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HaskForce"><span class="toc-text">HaskForce</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关工具"><span class="toc-text">相关工具</span></a></li></ol></li></ol>
 </div>
     
 </div>
@@ -172,9 +172,21 @@
 <li>Executable一定要填写</li>
 </ol>
 </li>
-<li><p>点击 run 就能运行你的Haskell程序了！<div style="text-align:center;color: #ccc;font-size:14px;"><br>  —— 本文结束 ——<br></div></p>
+<li><p>点击 run 就能运行你的Haskell程序了！</p>
 </li>
 </ul>
+<h3 id="相关工具"><a href="#相关工具" class="headerlink" title="相关工具"></a>相关工具</h3><p>如果仅仅只有这些虽然就能愉快的编码了，但是笔者认为是完全不够的。毕竟如果没有代码格式化工具和静态代码分析工具，笔者是不会写代码的。所以怎么能少了这些呢！！！<br>刚好 HaskForce 整合了 hlint, ghc-mod, hindente 等相关 Haskell 工具，可以很好地与 IntelliJ IDEA 结合。它们的安装也十分简单，可以直接使用 Haskell Stack 安装，当然 hlint 也可以使用 Homebrew 安装，不过笔者建议使用统一的安装方式方便将来管理。</p>
+<p><code>stack install hlint hindente stylish-haskell</code></p>
+<p>其中 ghc-mod 的安装值得特别说一下，目前新建的 Haskell Stack 工程默认的 resolver 是 lts-11.6 , 其 GHC 的版本号是 8.2.2 , 而 ghc-mod 的主工程由于<a href="https://github.com/DanielG/ghc-mod/issues/900" target="_blank" rel="noopener">技术问题</a>一直没有支持这套环境，所以想要成功编译出来是很麻烦的。所以如果大家想使用这款令人愉悦的黑客工作，可以按照下列步骤来编译。</p>
+<pre><code>1. 推荐建立一个独立的目录来存储接下来要使用的文件，编译完成后即可删除
+2. cd 你刚刚建的目录
+3. git clone https://github.com/DanielG/ghc-mod.git -b ghc802
+4. git clone https://github.com/DanielG/cabal-helper.git
+5. cd ghc-mod ; touch stack.yaml
+</code></pre><p>因为通过 Haskell Stack 来编译 ghc-mod 需要配置一个 stack.yaml , 所以用你最喜欢的编译器打开 stack.yaml 并写上下面的内容：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">resolver:</span> <span class="string">lts-11.6</span> <span class="comment"># current resolver</span></span><br><span class="line"></span><br><span class="line"><span class="attr">packages:</span></span><br><span class="line"><span class="attr">- location:</span> <span class="string">.</span></span><br><span class="line"><span class="attr">- location:</span> <span class="string">./core</span> <span class="comment"># seems like ghc-mod-core got integrated</span></span><br><span class="line"><span class="attr">- location:</span> <span class="string">../cabal-helper</span></span><br><span class="line"><span class="attr">  extra-dep:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">extra-deps:</span> </span><br><span class="line"><span class="bullet">-</span> <span class="string">extra-1.6.6</span> <span class="comment"># escapeJSON was missing with 1.5.3</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">monad-journal-0.7.2</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">optparse-applicative-0.13.2.0</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">unix-compat-0.4.3.1</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">either-4.4.1.1</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">cabal-plan-0.3.0.0</span></span><br><span class="line"></span><br><span class="line"><span class="attr">flags:</span> <span class="string">&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">extra-package-dbs:</span> <span class="string">[]</span></span><br><span class="line"></span><br><span class="line"><span class="attr">allow-newer:</span> <span class="literal">true</span> <span class="comment"># so it builds / too lazy to pinpoint exact versions</span></span><br></pre></td></tr></table></figure>
+<p>现在在当前目录使用 <code>stack install</code> 命令即可正常编译出 ghc-mod 与 ghc-modi 并会被放在 <code>~/.local/bin</code> 目录下，你可以将这个目录加入 shell 的环境变量中也可以把它们移到已经加到 shell 的环境变量的目录下。</p>
+<p>最后打开 IntelliJ IDEA 的进入偏好设置界面界面，找到 Haskell Tools 一栏，然后找到你想要使用的工具，点击 Auto Find 按钮然后确认，就能在 IntelliJ IDEA 使用这些工具了！<div style="text-align:center;color: #ccc;font-size:14px;"><br>    —— 本文结束 ——<br></div></p>
 <p><center>本作品采用采用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="noopener">知识共享署名 4.0 国际许可协议</a>进行许可。</center><br><br></p>
 
         
