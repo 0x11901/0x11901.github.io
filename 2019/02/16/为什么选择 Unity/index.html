@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么选择-unity"><span class="toc-text">为什么选择 unity</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unity-简介"><span class="toc-text">unity 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#笛卡尔坐标系——应用最广的坐标系"><span class="toc-text">笛卡尔坐标系——应用最广的坐标系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#unity-中的坐标系"><span class="toc-text">unity 中的坐标系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#投影"><span class="toc-text">投影</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五大面板"><span class="toc-text">五大面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本构成元素"><span class="toc-text">基本构成元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#射线（Ray）"><span class="toc-text">射线（Ray）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NGUI-与-UGUI"><span class="toc-text">NGUI 与 UGUI</span></a></li></ol></li></ol>
 </div>
     
 </div>
@@ -131,7 +131,156 @@
 </span>
     </div>
     <div class="post-content no-indent">
-        
+        <h2 id="为什么选择-unity"><a href="#为什么选择-unity" class="headerlink" title="为什么选择 unity"></a>为什么选择 unity</h2><ul>
+<li>主流游戏引擎：unity、cocos2d-x 等有跨平台需求<ul>
+<li>why unity？Develop once deploy anywhere<ul>
+<li>跨多个主流平台（iOS、Android、pc、playstation、Xbox、switch、web）的游戏引擎</li>
+<li>可以开发 3d 和 2d 游戏</li>
+</ul>
+</li>
+<li>unity 几乎支持所有主流的 3d 动画软件，如 3ds Max、Maya、LightWave<ul>
+<li>仅需将制作的模型动画导出为 FBX 格式就可以供 unity 使用</li>
+</ul>
+</li>
+<li>发展方向：手机游戏、虚拟现实、工业控制</li>
+</ul>
+</li>
+</ul>
+<h2 id="unity-简介"><a href="#unity-简介" class="headerlink" title="unity 简介"></a>unity 简介</h2><h3 id="笛卡尔坐标系——应用最广的坐标系"><a href="#笛卡尔坐标系——应用最广的坐标系" class="headerlink" title="笛卡尔坐标系——应用最广的坐标系"></a>笛卡尔坐标系——应用最广的坐标系</h3><ol>
+<li><p>1D</p>
+<p>多年以前，人们为了方便数 🐑 发明了自然数。人们出于习惯把 🐑 排成一排来计数，这导致了数轴概念的产生</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxm12pvweqj30f704v3zs.jpg" alt=""></p>
+<p>历史上的思想家确定了 “零” 为没有羊，右边的箭头来表示数轴可以无限延长，历史上的思想家想到它表示无穷大…… 后来又出现了债务和负数的概念，这种情况导致了蒸熟的产生——由自然数和它们的相反数（负数）组成</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxm1aak9qvj30lc04ydhd.jpg" alt=""></p>
+<p>后来人们发现日常生活中有些数无法用有理数表示，例如 _π_，这就产生了实数</p>
+<p>研究自然数和整数的领域称为 <strong> 离散数学 </strong>，研究实数的领域称为 <strong> 连续数学 </strong></p>
+<p>​ _ 计算机图形学第一准则：近似原则如果它看上去是对的它就是对的 _</p>
+</li>
+</ol>
+<p>2) 2D</p>
+<ul>
+<li><p>直角坐标系（法国哲学家、数学家笛卡尔为了把几何图形与代数方程结合起来而发明的）</p>
+<ol>
+<li><p>每个 2D 笛卡尔坐标系都有原点（0，0）</p>
+</li>
+<li><p>两条无限延伸的轴过原点互相垂直</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxm1nn3gbnj30i40gd76o.jpg" alt=""></p>
+</li>
+</ol>
+</li>
+</ul>
+<p>3) 3D</p>
+<ul>
+<li><p>第三个维度，第三个轴</p>
+<ul>
+<li><p>第三个轴称为 z 轴</p>
+</li>
+<li><p>3 个轴互相垂直，也就是每个轴都垂直于其他两个轴</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxm20s3n8nj30d80bxwjo.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p>3D 坐标系之间不一定是等价的，事实上存在两种完全不同的 3D 坐标系：左手坐标系和右手坐标系</p>
+<p><img src="https://i.imgur.com/E5layUO.png" alt="3D 坐标系" title="3D 坐标系"></p>
+<ul>
+<li>unity 使用左手坐标系</li>
+</ul>
+</li>
+</ul>
+<h3 id="unity-中的坐标系"><a href="#unity-中的坐标系" class="headerlink" title="unity 中的坐标系"></a>unity 中的坐标系</h3><ol>
+<li><p>3D 坐标系</p>
+<ul>
+<li><p>世界坐标系</p>
+</li>
+<li><p>局部坐标系</p>
+</li>
+</ul>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxm23o6e08j30bc0axwgq.jpg" alt=""></p>
+</li>
+<li><p>2D 坐标系a</p>
+<ul>
+<li><p>相机坐标系（Viewport）</p>
+</li>
+<li><p>屏幕坐标系（Screen）</p>
+</li>
+</ul>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxm2fn8nzwj307705smxc.jpg" alt=""></p>
+<ul>
+<li>GUI 坐标系</li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxm248idf9j30ap09tmxx.jpg" alt=""></p>
+</li>
+</ol>
+<h3 id="投影"><a href="#投影" class="headerlink" title="投影"></a>投影</h3><ul>
+<li><p>在计算机三维图像中，投影可以看作是一种将三维坐标表换为二维坐标的方法，常用的有正交投影和透视投影</p>
+<ol>
+<li><p>正交投影：用于对二维世界的呈现</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxm2da3amaj30h20c9q62.jpg" alt=""></p>
+</li>
+<li><p>透视投影：与人的视觉系统类似，多用于在二维平面中对三维世界的呈现</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxm2dks4p5j30id0cljwc.jpg" alt=""></p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="五大面板"><a href="#五大面板" class="headerlink" title="五大面板"></a>五大面板</h3><ol>
+<li>Hierarchy：当前场景中的物体</li>
+<li>Project：项目中的所有资源</li>
+<li>Scene：当前场景的预览视图</li>
+<li>Inspector：属性</li>
+<li>Game：游戏视图，以摄像机视角查看场景，可以预览到玩家看到的内容</li>
+</ol>
+<h3 id="基本构成元素"><a href="#基本构成元素" class="headerlink" title="基本构成元素"></a>基本构成元素</h3><ol>
+<li>GameObject 游戏对象</li>
+<li>Component 组件</li>
+<li>Material 渲染材质</li>
+<li>Texture 渲染纹理</li>
+</ol>
+<h3 id="射线（Ray）"><a href="#射线（Ray）" class="headerlink" title="射线（Ray）"></a>射线（Ray）</h3><ul>
+<li>射线是由一个点向另外一个点发生的一条线，一旦与其他模型发生碰撞，他将会停止发射。注意这条线是逻辑上的，界面上看不到。一般使用射线判断是否发射至某个游戏对象上或者获取到鼠标点击的游戏对象等</li>
+<li>射线是从摄像机发出的</li>
+</ul>
+<h3 id="NGUI-与-UGUI"><a href="#NGUI-与-UGUI" class="headerlink" title="NGUI 与 UGUI"></a>NGUI 与 UGUI</h3><ol>
+<li>什么是 UI?<br>UI 即 User Interface（用户界面）的简称。泛指用户的操作界面，UI 设计主要指界面的样式，美观程度。而使用上，对软件的人机交互、操作逻辑、界面美观的整体设计则是同样重要的另一个门道。好的 UI 不仅是让软件变得有个性有品味，还要让软件的操作变得舒适、简单、自由，充分体现软件的定位和特点。</li>
+<li>NGUI 与 UGUI 详细对比</li>
+</ol>
+<ul>
+<li><p>UGUI 是官方 4.6 以后推出的一套 UI 组件，相对于之前的 GUI 倒是改头换面了，可视化操作，便捷、省心。NGUI 则是 unity 一直以来最强的 UI 插件（没有之一），甚至还是官方新 UI 的导师。</p>
+<ul>
+<li><p>ugui 的 ui 根目录为 canvas（画布），ngui 则是 uiroot。在命名上官方似乎更贴合想象力。</p>
+</li>
+<li><p>在屏幕自适应方面，ugui 为 render mode。ngui 则为 scaling style。</p>
+</li>
+<li><p>anchor（锚点）的使用方式差不多，都是用来固定位置，在可视化方面，ugui 的花瓣锚点真不太好调。</p>
+</li>
+<li><p>ngui 灵活性不是一般的高，随意创建一个 sprite，加了 boxcollider，它就可以是按钮、滑动条……</p>
+</li>
+<li><p>ugui 的 sprite 的切图功能真心不错。ngui 使用图集不能直接拖拉（毕竟是三方插件）略不方便。</p>
+</li>
+<li><p>ngui 的 tween 动画功能很省心，无需额外定义代码，使用封装好的脚本就可以实现一些简单动画，叠加脚本甚至能实现相对复杂的动画效果。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4035828-aa96cf226a850983.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li><p>各自的优缺点</p>
+<ul>
+<li>NGUI 还保留着图集，需要进行图集的维护。而 UGUI 没有图集的概念，可以充分利用资源，避免重复资 源。</li>
+<li>UGUI 出现了锚点的概念，更方便屏幕自适应。</li>
+<li>NGUI 支持图文混排，UGUI 暂未发现支持此功能。</li>
+<li>UGUI 没有 UIWrap 来循环 scrollview 内容。</li>
+<li>UGUI 暂时没有 Tween 组件。</li>
+</ul>
+</li>
+<li><p>使用选择总结</p>
+<p>UGUI 由于是 Unity 原生支持的，所以使用上会更加的人性化。并且伴随着版本升级功能会越来越强，逐渐将成为主流 ui 方案。NGUI 是 UGUI 出现之前的产物，通过 MeshRenderer 来实现类似 CanvasRenderer 的功能，概念上有点蹩脚。作为一个插件虽然已最大努力让 UI 开发工作变得简单，但相比能够让 UnityEditor 做出相应修改的 UGUI（如 RectTransform 的出现），其易用性是没法比的。综合来说，新的项目建议使用 UGUI，学习成本不高，工具流更有助于提高开发效率。</p>
+<div style="text-align:center;color: #ccc;font-size:14px;"><br> —— 本文结束 ——<br></div>
+
+</li>
+</ol>
+<p><center>本作品采用采用<a href="https://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="noopener">知识共享署名 4.0 国际许可协议</a>进行许可。</center><br><br></p>
+
         
             <div class="donate-container">
     <div class="donate-button">
